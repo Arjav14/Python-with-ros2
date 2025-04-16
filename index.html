@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Robotics from Ground Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mastering Robotics from Ground Up</h1>
+        <p class="subtitle">Thynk limitless</p>
+        <img src="C:\Users\HP\OneDrive\Desktop\ros lecture series\images\Certificate.jpg" alt="Bidyut Logo" 
+        style="position: absolute; right: 20px; top: 8px; height: 110px; width: 200px; object-fit: fill;">
+    </header>
+
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <h3>ROS2 with Python</h3>
+            <ul>
+                <li><a href="#python-setup" class="active">Python Setup</a></li>
+                <li><a href="#workspace-setup">Workspace Setup</a></li>
+                <li><a href="#create-package">Create Package</a></li>
+                <li><a href="#package-structure">Package Structure</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="sidebar-toggle"></div>
+
+    <div class="container">
+        <main>
+            <section id="python-setup">
+                <h2>Python Setup for ROS2</h2>
+                <p>Hey everyone, welcome to the first lecture of our Python + ROS2 series! In this video, we're going to install Python 3 and set up a clean development environment, perfect for working with robotics and ROS2. Let's get started!</p>
+                
+                <h3>Part 1: Check Python Version</h3>
+                <pre><code>python3 --version</code></pre>
+                <p>Most Ubuntu systems already come with Python 3 pre-installed. You can check it with this command."</p>
+                
+                <h3>Part 2: Install Python + pip</h3>
+                <pre><code>sudo apt update
+sudo apt install python3 python3-pip -y</code></pre>
+                <p>If Python isn't installed or pip is missing, just run this command to install them.</p>
+
+                <h3>Part 3: Setup Virtual Environment</h3>
+                <pre><code>sudo apt install python3-venv
+python3 -m venv ros2env
+source ros2env/bin/activate</code></pre>
+                <p>Now let's create a virtual environment. This helps us manage Python packages separately for each project — super useful when working with ROS2 nodes.</p>
+
+                <h3>Part 4: Install Basic Packages</h3>
+                <pre><code>pip install numpy matplotlib pandas</code></pre>
+              
+                <p>That's it! Python is installed, and your development environment is ready.</p>
+            </section>
+
+            <section id="workspace-setup">
+                <h2>ROS2 Python Workspace Setup (colcon)</h2>
+                <p>For Humble on Ubuntu 22.04</p>
+                
+                <h3>Step 1: Create the ROS2 Workspace</h3>
+                <pre><code>mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws</code></pre>
+                <p>"In ROS2, all your packages live inside a workspace. We're calling it ros2_ws."</p>
+                
+                <h3>Step 2: Source ROS2 Environment</h3>
+                <p>Before building anything, always source the ROS2 setup script:</p>
+                <pre><code>source /opt/ros/humble/setup.bash</code></pre>
+                <p>You can also add it to .bashrc so it loads automatically:</p>
+                <pre><code>echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+source ~/.bashrc</code></pre>
+
+                <h3>Step 3: Build the Empty Workspace</h3>
+                <p>From inside ~/ros2_ws:</p>
+                <pre><code>colcon build</code></pre>
+                <p>You'll see:</p>
+                <pre>Starting >>> ...
+Finished <<< ...</pre>
+                <p>Even though our workspace is empty now, colcon build initializes the build system. Later, we'll add our own packages here.</p>
+
+                <h3>Step 4: Source the Workspace (After Build)</h3>
+                <pre><code>source install/setup.bash</code></pre>
+                <p>Again, to avoid repeating this:</p>
+                <pre><code>echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
+source ~/.bashrc</code></pre>
+
+                <h3>Step 5: Check Your Workspace Is Working</h3>
+                <pre><code>ros2 pkg list | grep demo</code></pre>
+                <p>You should see some demo packages like:</p>
+                <pre>demo_nodes_cpp
+demo_nodes_py</pre>
+
+                <h3>Final Folder Structure Now Looks Like:</h3>
+                <pre>ros2_ws/
+├── build/
+├── install/
+├── log/
+└── src/</pre>
+            </section>
+
+            <section id="create-package">
+                <h2>Creating Your First ROS2 Python Package</h2>
+                
+                <h3>1. Navigate to src Directory</h3>
+                <pre><code>cd ~/ros2_ws/src</code></pre>
+
+                <h3>2. Create a New ROS2 Python Package</h3>
+                <p>Use this command (with a node):</p>
+                <pre><code>ros2 pkg create --build-type ament_python --node-name my_node my_package</code></pre>
+                <p>This creates:</p>
+                <ul>
+                    <li>my_package/my_node.py → Your Hello World node</li>
+                    <li>setup.py, setup.cfg, package.xml</li>
+                    <li>resource/, test/, __init__.py, etc.</li>
+                </ul>
+                <p> Terminal will confirm creation with:</p>
+                <pre>going to create a new package
+...
+creating ./my_package/my_package/my_node.py</pre>
+
+                <h3>3. Build the Package</h3>
+                <p>Return to your workspace root:</p>
+                <pre><code>cd ~/ros2_ws
+colcon build</code></pre>
+                <p> To build only this package later:</p>
+                <pre><code>colcon build --packages-select my_package</code></pre>
+
+                <h3>4. Source the Workspace</h3>
+                <p>Before using your package:</p>
+                <pre><code>source install/local_setup.bash</code></pre>
+
+                <h3>5. Run Your Node</h3>
+                <p>Run the node created by --node-name:</p>
+                <pre><code>ros2 run my_package my_node</code></pre>
+                <p>Output:</p>
+                <pre>Hi from my_package.</pre>
+            </section>
+
+            <section id="package-structure">
+                <h2>Package Structure and Configuration</h2>
+                
+                <h3>6. Package Contents Overview</h3>
+                <p>Navigate to:</p>
+                <pre><code>cd ~/ros2_ws/src/my_package</code></pre>
+                <p>You will see:</p>
+                <pre>my_package/  package.xml  resource/  setup.cfg  setup.py  test/</pre>
+                <p>Your node is located at:</p>
+                <pre><code>my_package/my_package/my_node.py</code></pre>
+
+
+         
+            </section>
+            <section id="additional-resources">
+                <h2>Additional Resources</h2>
+                <div class="note">
+                    <div class="note-title">📖 Official ROS2 Tutorials</div>
+                    <p>For more detailed examples and explanations, check out these official ROS2 documentation pages:</p>
+                    <ul>
+                        <li>
+                            <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html" target="_blank">
+                                Writing a Simple Publisher and Subscriber (Python)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html" target="_blank">
+                                Writing a Simple Service and Client (Python)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Bidyut innovation. All rights reserved.</p>
+            <p>Contact: <a href="mailto:info@thynklimitless.com">info@thynklimitless.com</a></p>
+        </footer>
+    </div>
+
+    <script src="js.js"></script>
+</body>
+</html>
