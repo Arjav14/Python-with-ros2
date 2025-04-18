@@ -34,22 +34,23 @@
                 <h2>Python Setup for ROS2</h2>
                 <p>Python is widely used in robotics due to its simplicity and extensive library support. We are going to create and implement some basic python based programs in ROS2 and understand how the journey to Mastering Robotics starts . we're going to install Python 3 and set up a clean development environment, perfect for working with ROS2. Let's get started!</p>
                 
-                <h3>Part 1: Check Python Version</h3>
-                <pre><code>python3 --version</code></pre>
+                <h3>Step 1: Check Python Version</h3>
                 <p>Most Ubuntu systems already come with Python 3 pre-installed. You can check it with this command.</p>
-                
-                <h3>Part 2: Install Python + pip</h3>
-                <pre><code>sudo apt update
-sudo apt install python3 python3-pip -y</code></pre>                                                                                                                                                                                                                                                                                                                                                                                
-                <p>If Python isn't installed or pip is missing, just run this command to install them.</p>
+                <pre><code>python3 --version</code></pre>
 
-                <h3>Part 3: Setup Virtual Environment</h3>
+                <h3>Step 2: Install Python + pip</h3>                                                                                                                                                                                                                                                                                                                                                                             
+                <p>If Python isn't installed or pip is missing, just run this command to install them.</p>
+                <pre><code>sudo apt update
+sudo apt install python3 python3-pip -y</code></pre>
+
+                <h3>Step 3: Setup Virtual Environment</h3>
                
                 <p>A virtual environment is a Python environment in isolation that has all dependencies isolated from the system Python. During ROS 2 development, it prevents version conflicts, keeps your projects tidy, enables safe testing of libraries such as rclpy or opencv-python, and makes your setup simpler to share and replicate.Now let's create a virtual environment. This helps us manage Python packages separately for each project — super useful when working with ROS2 nodes.</p>
- <pre><code>sudo apt install python3-venv
+                     <pre><code>sudo apt install python3-venv
 python3 -m venv myenv
 source myenv/bin/activate</code></pre>
-                <h3>Part 4: Install Basic Packages</h3>
+
+                <h3>Step 4: Install Basic Packages</h3>
                 <pre><code>pip install numpy matplotlib pandas</code></pre>
               
                 <p>That's it! Python is installed along with some of the most popular libraries, and your development environment is ready.</p>
@@ -57,12 +58,11 @@ source myenv/bin/activate</code></pre>
 
             <section id="workspace-setup">
                 <h2>ROS2 Python Workspace Setup (colcon)</h2>
-                <p>For Humble on Ubuntu 22.04</p>
+                <p>A ROS 2 workspace is a directory in which you create, build, and organize your ROS 2 packages. It maintains your code, build artifacts, and installed outputs in order, enabling you to develop several packages simultaneously, build them with tools such as colcon, and source the environment for easy execution and testing.</p>
                 
                 <h3>Step 1: Create the ROS2 Workspace</h3>
                 <pre><code>mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws</code></pre>
-                <p>In ROS2, all your packages live inside a workspace. We're calling it ros2_ws.</p>
                 
                 <h3>Step 2: Source ROS2 Environment</h3>
                 <p>Before building anything, always source the ROS2 setup script:</p>
@@ -138,8 +138,8 @@ colcon build</code></pre>
                 
                 <h3>Package Contents Overview</h3>
                 <p>Navigate to:</p>
-                <pre><code>cd ~/ros2_ws/src/my_package</code>
-                <code>ls</code></pre>
+                <pre><code>cd ~/ros2_ws/src/my_package
+ls </code></pre>
                 <p>You will see:</p>
                 <pre>my_package/  package.xml  resource/  setup.cfg  setup.py  test/</pre>
                 <p>Your node is located at:</p>
