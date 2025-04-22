@@ -219,18 +219,19 @@ ls </code></pre>
             <section id="launch-files">
                 <h2>Creating Launch Files</h2>
                 <p>Launch file performs the following actions:
+ <ul>      
+<li>Setup command line arguments with defaults</li>
 
-Setup command line arguments with defaults
+<li>Include another launch file</li>
 
-Include another launch file
+<li>Include another launch file in another namespace</li>
 
-Include another launch file in another namespace
+<li>Start a node and setting its namespace</li>
 
-Start a node and setting its namespace
+<li>Start a node, setting its namespace, and setting parameters in that node (using the args)</li>
 
-Start a node, setting its namespace, and setting parameters in that node (using the args)
-
-Create a node to remap messages from one topic to another
+<li>Create a node to remap messages from one topic to another</li> 
+     </ul>
 Launch files allow you to start multiple nodes and configure their parameters automatically.Launch file can be implemented in XML, YAML, and Python.
 Here's how to add one to your package:</p>
                 
