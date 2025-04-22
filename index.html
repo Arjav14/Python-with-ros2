@@ -218,7 +218,21 @@ ls </code></pre>
             </section>
             <section id="launch-files">
                 <h2>Creating Launch Files</h2>
-                <p>Launch files allow you to start multiple nodes and configure their parameters automatically. Here's how to add one to your package:</p>
+                <p>Launch file performs the following actions:
+
+Setup command line arguments with defaults
+
+Include another launch file
+
+Include another launch file in another namespace
+
+Start a node and setting its namespace
+
+Start a node, setting its namespace, and setting parameters in that node (using the args)
+
+Create a node to remap messages from one topic to another
+Launch files allow you to start multiple nodes and configure their parameters automatically.Launch file can be implemented in XML, YAML, and Python.
+Here's how to add one to your package:</p>
                 
                 <h3>1. Create launch directory</h3>
                 <pre><code>cd ~/ros2_ws/src/py_pubsub
